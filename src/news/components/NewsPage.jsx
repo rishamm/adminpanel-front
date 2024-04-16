@@ -61,11 +61,11 @@ const NewsPage = () => {
         <header className="relative flex items-center justify-between py-4 mx-10">
           <div className='flex flex-col gap-3'>
             <div className="text-xl font-bold text-navy-700">
-              News List
+              User List
             </div>
             <div className="">
-              <FormControl variant="outlined">
-                <InputLabel id="category-label">Category</InputLabel>
+              {/* <FormControl variant="outlined">
+                <InputLabel id="category-label">C</InputLabel>
                 <Select
                   labelId="category-label"
                   value={selectedCategory}
@@ -78,12 +78,12 @@ const NewsPage = () => {
                     <MenuItem key={category} value={category}>{category}</MenuItem>
                   ))}
                 </Select>
-              </FormControl>
+              </FormControl> */}
             </div>
           </div>
-          <div className='flex gap-3'>
+          {/* <div className='flex gap-3'>
             <AddNewsList />
-          </div>
+          </div> */}
         </header>
         <Card className='mx-10 mb-10' style={{ border: '1px solid #e0e0e0', borderRadius: '8px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
           <TableContainer component={Paper}>

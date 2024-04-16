@@ -41,48 +41,7 @@ const Hero = () => {
   return (
     <div>
       <Card extra={` h-full sm:overflow-auto my-5 p-5 mx-5`}>
-        <header className="relative flex items-center justify-between py-4">
-          <div className="text-xl font-bold text-navy-700">
-            Hero
-          </div>
-          <div className='flex gap-3'>
-            <EditHero/>
-          </div>
-        </header>
-        <div className='flex gap-5'>
-          <div className='flex flex-col gap-5 w-[50%]'>
-            <div className='p-6 h-[70%] font-normal tracking-tighter bg-gray-200 rounded-3xl text-lg leading-23'>
-              <h1>Welcome to OG Hub Sculpting Tomorrow's success Today</h1>
-            </div>
-            
-            <div className='h-[20%] p-3 font-normal tracking-tighter text-gray-600 bg-gray-200 rounded-3xl text-lg leading-23'>
-              <p className="p-6 text-navy-700">
-                Button Link
-              </p>
-            </div>
-          </div>
-          <div className="flex flex-col w-[50%]  gap-3">
-            <div className='h-48'>
-              <img
-                src={hero1}
-                className="w-full h-full mb-3 rounded-xl 3xl:h-full 3xl:w-full"
-                alt=""
-              />
-            </div>
-            <div className='flex gap-5 h-60'>
-              <img
-                src={hero2}
-                className="w-full h-full mb-3 rounded-xl 3xl:h-full 3xl:w-full"
-                alt=""
-              />
-              <img
-                src={hero3}
-                className="w-full h-full mb-3 rounded-xl 3xl:h-full 3xl:w-full"
-                alt=""
-              />
-            </div>
-
-          </div>
+        <div>
         </div>
       </Card>
     </div>

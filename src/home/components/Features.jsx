@@ -61,41 +61,8 @@ const Features = () => {
   return (
     <div>
       <Card extra={`w-full h-full sm:overflow-auto my-5 p-5`}>
-        <header className="relative flex items-center justify-between py-4">
-          <div className="text-xl font-bold text-navy-700">Features</div>
-          <div className="flex gap-3">
-            <AddFeatures />
-          </div>
-        </header>
-        <div className="flex w-full gap-3">
-          <div className="grid grid-cols-3 gap-5 ">
-            {featureCards.map((card, index) => (
-              <div
-                key={index}
-                className="p-3 bg-gray-200 rounded-md"
-                style={{
-                  backgroundImage: `url(${card.backgroundImage})`,
-                  backgroundSize: "cover",
-                  backgroundPosition: "center",
-                  width: "100%",
-                }}
-              >
-                <h2 className="text-lg font-semibold">{card.heading}</h2>
-                <p>{card.description}</p>
-                <div className="flex items-center justify-end gap-2">
-                  <button className="text-navy-700">
-                    <MdDelete className="w-6 h-6 text-navy-700 " />
-                  </button>
-                  <button className="text-navy-700">
-                    <FaEdit
-                      onClick={handleEdit}
-                      className="w-5 h-6 text-navy-700 "
-                    />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="relative flex items-center justify-between py-4">
+        
         </div>
       </Card>
     </div>

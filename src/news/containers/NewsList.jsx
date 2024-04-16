@@ -4,7 +4,7 @@ import Hero from '../components/Hero'
 const NewsList = () => {
   return (
     <div>
-      <Hero/>
+    
       <NewsPage />
       
     </div>

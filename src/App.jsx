@@ -36,10 +36,10 @@ function App() {
               <Route path='/' exact element={<Home />} />
               <Route path='/programs' exact element={<Programs />} />
               <Route path='/career' exact element={<Career />} />
-              <Route path='/news' exact element={<News />} />
+              <Route path='/users' exact element={<News />} />
               <Route path='/contact' exact element={<ContactUs />} />
               <Route path='/testimonials' exact element={<Testimonial />} />
-              <Route path='/communities' exact element={<Communities />} />
+              <Route path='/pay-request' exact element={<Communities />} />
               <Route path='/package' exact element={<Package />} />
               <Route path='/Course' exact element={<Courses />} />
               <Route path='/socialmedia' exact element={<SocialMedia />} />

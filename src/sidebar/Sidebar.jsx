@@ -10,6 +10,9 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
+import AccessibilityIcon from '@mui/icons-material/Accessibility';
+import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
+import CottageIcon from '@mui/icons-material/Cottage';
 import { useNavigate } from 'react-router-dom';
 import logo from '../assets/og_logo.png'
 import { Divider } from '@mui/material';
@@ -75,24 +78,31 @@ export default function Sidebar() {
     const [open, setOpen] = React.useState(true);
     const navigate = useNavigate()
     const menuItems = [
-        { text: 'Home', route: '/' },
-        { text: 'Programs', route: '/programs' },
-        { text: 'News', route: '/news' },
-        { text: 'Career', route: '/career' },
-        { text: 'Course', route: '/course' },
-        { text: 'Package', route: '/package' },
-        { text: 'Contact Us', route: '/contact' },
-        { text: 'Testimonials', route: '/testimonials' },
-        { text: 'Communities', route: '/communities' },
-        { text: 'Hackathon', route: '/hack' },
-        { text: 'Education', route: '/education' },
+        { text: 'Home', route: '/' ,icon:  <CottageIcon />},
+        { text: 'Users', route: '/users',icon:  <AccessibilityIcon /> },
+        { text: 'Payment verification', route: '/pay-request',icon:  <AssuredWorkloadIcon /> },
+    
     ];
 
-    const FooterItems = [
-        { text: 'Social Media', route: '/socialmedia' },
-        { text: 'Terms&Conditions', route: '/terms&Conditions' },
-        { text: 'Privacy Policy', route: '/privacyPolicy' },
-    ];
+    // const menuItems = [
+    //     { text: 'Home', route: '/' },
+    //     { text: 'Programs', route: '/programs' },
+    //     { text: 'News', route: '/news' },
+    //     { text: 'Career', route: '/career' },
+    //     { text: 'Course', route: '/course' },
+    //     { text: 'Package', route: '/package' },
+    //     { text: 'Contact Us', route: '/contact' },
+    //     { text: 'Testimonials', route: '/testimonials' },
+    //     { text: 'Communities', route: '/communities' },
+    //     { text: 'Hackathon', route: '/hack' },
+    //     { text: 'Education', route: '/education' },
+    // ];
+
+    // const FooterItems = [
+    //     { text: 'Social Media', route: '/socialmedia' },
+    //     { text: 'Terms&Conditions', route: '/terms&Conditions' },
+    //     { text: 'Privacy Policy', route: '/privacyPolicy' },
+    // ];
 
 
 
@@ -104,7 +114,7 @@ export default function Sidebar() {
                     <div className="flex items-center justify-between w-full px-3">
                         <MenuIcon onClick={() => setOpen(!open)} className='cursor-pointer ' />
                         {open ? (
-                            <img className='logo' src={logo} alt="" />
+                           <h6 className='text-xl font-bold'>meta proton</h6>
                         ) : null}
                     </div>
 
@@ -114,7 +124,7 @@ export default function Sidebar() {
                         <ListItem key={index} disablePadding sx={{ display: 'block' }} onClick={() => navigate(item.route)}>
                             <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5 }}>
                                 <ListItemIcon sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center' }}>
-                                    <MailIcon />
+                                  {item.icon}
                                 </ListItemIcon>
                                 <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
                             </ListItemButton>
@@ -122,7 +132,7 @@ export default function Sidebar() {
                     ))}
                 </List>
                 <Divider />
-                <List>
+                {/* <List>
                     <ListItem disablePadding sx={{ display: 'block' }}>
                         <ListItemText primary="Footer" className="mx-5 font-bold"
                             style={{
@@ -148,7 +158,7 @@ export default function Sidebar() {
                             </ListItemButton>
                         </ListItem>
                     ))}
-                </List>
+                </List> */}
             </Drawer>
 
         </Box>

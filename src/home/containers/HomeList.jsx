@@ -7,8 +7,8 @@ import Features from '../components/Features'
 const HomeList = () => {
   return (
     <div>
-      <Hero />
-      <AboutUs />
+      {/* <Hero />
+      <AboutUs /> */}
       <Features />
       
     </div>

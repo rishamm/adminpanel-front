@@ -28,11 +28,7 @@ const CommunityList = () => {
                 <CardHeader
                     className='mx-7'
                     title="Communities"
-                    action={
-                        <IconButton>
-                            <AddCommunityLists />
-                        </IconButton>
-                    }
+                    
                 />
                 <Card className='mx-10 mb-10' style={{ border: '1px solid #e0e0e0', borderRadius: '8px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
                     <TableContainer component={Paper}>

@@ -4,9 +4,8 @@ import OurCommunity from "../components/OurCommunity"
 
 const CommunitySection = () => {
     return (
-        <div className="mx-5 mb-5">
-            <OurCommunity />
-            <CommunityBackground />
+        <div className="mx-5 mb-5 pt-7">
+          
             <CommunityList />
         </div>
     )
