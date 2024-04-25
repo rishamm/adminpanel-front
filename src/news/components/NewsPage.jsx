@@ -11,35 +11,25 @@ import Paper from '@mui/material/Paper';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import { Tooltip } from '@mui/material';
 import publish from "../../assets/upload.png";
-import AddNewsList from '../addingSection/AddNewsList';
 import Pagination from '@mui/material/Pagination';
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { fetchNewsList } from '../../action/newsAction';
+import { useDispatch, useSelector } from 'react-redux';
 import { IoEye } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
+import { fetchUserList } from '../../action/userAction'; // Import fetchUserList action
 
 const NewsPage = () => {
-  const [showModal, setShowModal] = useState(false);
+  const [page, setPage] = useState(1);
+  const [rowsPerPage] = useState(10);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchNewsList());
+    dispatch(fetchUserList());
   }, [dispatch]);
-  const news = useSelector((i) => i.newsState.newsData);
+
+  const user = useSelector((i) => i.userState.userData)
+  console.log(user,"aaa")
   const navigate = useNavigate();
-
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [page, setPage] = useState(1);
-  const rowsPerPage = 10;
-
-  // Extracting unique categories from news
-  const categories = [...new Set(news.map(newsItem => newsItem.category))];
-
-  const filteredNews = selectedCategory === 'All' ? news : news.filter(newsItem => newsItem.category === selectedCategory);
 
   const handleChangeCategory = (event) => {
     setSelectedCategory(event.target.value);
@@ -50,8 +40,7 @@ const NewsPage = () => {
     setPage(newPage);
   };
 
-
-  const handleView = (newsId) => {
+  const handleView = (userId) => {
     navigate('/hack');
   };
 
@@ -63,56 +52,33 @@ const NewsPage = () => {
             <div className="text-xl font-bold text-navy-700">
               User List
             </div>
-            <div className="">
-              {/* <FormControl variant="outlined">
-                <InputLabel id="category-label">C</InputLabel>
-                <Select
-                  labelId="category-label"
-                  value={selectedCategory}
-                  onChange={handleChangeCategory}
-                  label="Category"
-                  style={{ minWidth: '150px' }}
-                >
-                  <MenuItem key="All" value="All">All</MenuItem>
-                  {categories.map(category => (
-                    <MenuItem key={category} value={category}>{category}</MenuItem>
-                  ))}
-                </Select>
-              </FormControl> */}
-            </div>
           </div>
-          {/* <div className='flex gap-3'>
-            <AddNewsList />
-          </div> */}
         </header>
         <Card className='mx-10 mb-10' style={{ border: '1px solid #e0e0e0', borderRadius: '8px', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)' }}>
           <TableContainer component={Paper}>
             <Table>
               <TableHead>
                 <TableRow>
-                  <TableCell className="text-center"><strong>NO</strong></TableCell>
-                  <TableCell className="text-left"><strong>Heading</strong></TableCell>
-                  <TableCell className="text-left"><strong>Sub heading</strong></TableCell>
-                  <TableCell className="text-left"><strong>Date</strong></TableCell>
-                  <TableCell className="text-left"><strong>Time</strong></TableCell>
-                  <TableCell className="text-left"><strong>Link</strong></TableCell>
-                  <TableCell className="text-left"><strong>Action</strong></TableCell>
+                  <TableCell className="text-center">NO</TableCell>
+                  <TableCell className="text-left">Username</TableCell>
+                  <TableCell className="text-left">Email</TableCell>
+                  <TableCell className="text-left">Phone</TableCell>
+                  
+                  <TableCell className="text-left">Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {(filteredNews.slice((page - 1) * rowsPerPage, page * rowsPerPage)).map((newsItem, index) => (
-                  <TableRow key={newsItem.id}>
+                {user?.slice((page - 1) * rowsPerPage, page * rowsPerPage).map((user, index) => (
+                  <TableRow key={user.id}>
                     <TableCell className="text-center">{index + 1 + (page - 1) * rowsPerPage}</TableCell>
-                    <TableCell className="text-left">{newsItem.heading}</TableCell>
-                    <TableCell className="text-left">{newsItem.subHeading}</TableCell>
-                    <TableCell className="text-left">{newsItem.date}</TableCell>
-                    <TableCell className="text-left">{newsItem.Time}</TableCell>
-                    <TableCell className="text-left">{newsItem.link}</TableCell>
+                    <TableCell className="text-left">{user.username}</TableCell>
+                    <TableCell className="text-left">{user.email}</TableCell>
+                    <TableCell className="text-left">{user.phone}</TableCell>
                     <TableCell className="text-left">
                       <div className="flex items-center gap-2">
-                        <IconButton onClick={handleView}>
+                        <IconButton onClick={() => handleView(user.id)}>
                           <Tooltip title="view">
-                          <IoEye className='text-black'/>
+                            <IoEye className='text-black'/>
                           </Tooltip>
                         </IconButton>
                         <IconButton>
@@ -130,7 +96,6 @@ const NewsPage = () => {
                             <MdEdit className="w-5 h-6 text-black " />
                           </Tooltip>
                         </IconButton>
-                        
                       </div>
                     </TableCell>
                   </TableRow>
@@ -138,7 +103,7 @@ const NewsPage = () => {
               </TableBody>
             </Table>
             <Pagination
-              count={Math.ceil(filteredNews.length / rowsPerPage)}
+              count={Math.ceil(user?.length / rowsPerPage)}
               page={page}
               onChange={handleChangePage}
               variant="outlined"

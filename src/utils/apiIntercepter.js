@@ -1,7 +1,7 @@
 import axios from "axios";
 
 var axiosInstance = axios.create({});
-axiosInstance.defaults.baseURL = "http://localhost:5002/api/"
+axiosInstance.defaults.baseURL = "https://metaproton.cyclic.app/api"
 axiosInstance.interceptors.request.use(
   function (config) {
       return config;

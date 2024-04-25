@@ -7,20 +7,22 @@ import { careerReducer } from "../slices/careerSlice";
 import { programReducer } from "../slices/programSlice";
 import { newsReducer } from "../slices/newsSlice";
 import { communityReducer } from "../slices/communitySlice";
+import { userReducer } from "../slices/userSlice";
 
 
 const reducer = combineReducers({
 
 
     homeState: homeReducer,
-    contactState: contactReducer,
-    careerState: careerReducer,
-    programState: programReducer,
+    // contactState: contactReducer,
+    // careerState: careerReducer,
+    // programState: programReducer,
     newsState: newsReducer,
     communityState: communityReducer,
+    userState: userReducer,
 
     //shared
-    sharedState: footerDataReducer,
+    // sharedState: footerDataReducer,
 
 });
 
