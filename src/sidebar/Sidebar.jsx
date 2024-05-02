@@ -8,16 +8,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccessibilityIcon from '@mui/icons-material/Accessibility';
 import AssuredWorkloadIcon from '@mui/icons-material/AssuredWorkload';
 import CottageIcon from '@mui/icons-material/Cottage';
-import { useNavigate } from 'react-router-dom';
-import logo from '../assets/og_logo.png'
-import { Divider } from '@mui/material';
+import Divider from '@mui/material/Divider';
+import { useNavigate, useLocation } from 'react-router-dom';
 
-const drawerWidth = 300;
+const drawerWidth = 260;
 
 const openedMixin = (theme) => ({
     width: drawerWidth,
@@ -34,24 +32,8 @@ const closedMixin = (theme) => ({
         duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: `calc(${theme.spacing(7)} + 1px)`,
-    [theme.breakpoints.up('sm')]: {
-        width: `calc(${theme.spacing(8)} + 1px)`,
-    },
+    width: theme.spacing(7),
 });
-
-const DrawerHeader = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-
-
-}));
-
-
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
@@ -59,108 +41,89 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
         flexShrink: 0,
         whiteSpace: 'nowrap',
         boxSizing: 'border-box',
-        border: 'none',
-        ...(open && {
-            ...openedMixin(theme),
-            '& .MuiDrawer-paper': openedMixin(theme),
-            borderRight: 'none',
-        }),
         ...(!open && {
             ...closedMixin(theme),
             '& .MuiDrawer-paper': closedMixin(theme),
-            borderRight: 'none',
+        }),
+        ...(open && {
+            ...openedMixin(theme),
+            '& .MuiDrawer-paper': openedMixin(theme),
         }),
     }),
 );
 
+const DrawerHeader = styled('div')(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: theme.spacing(1),
+}));
+
 export default function Sidebar() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(true);
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [iconHovered, setIconHovered] = React.useState(null);
+    const location = useLocation();
+
     const menuItems = [
-        { text: 'Home', route: '/' ,icon:  <CottageIcon />},
-        { text: 'Users', route: '/users',icon:  <AccessibilityIcon /> },
-        { text: 'Payment verification', route: '/pay-request',icon:  <AssuredWorkloadIcon /> },
-    
+        { text: 'Home', route: '/', icon: <CottageIcon /> },
+        { text: 'Users', route: '/users', icon: <AccessibilityIcon /> },
+        { text: 'Payment Verification', route: '/pay-request', icon: <AssuredWorkloadIcon /> },
     ];
-
-    // const menuItems = [
-    //     { text: 'Home', route: '/' },
-    //     { text: 'Programs', route: '/programs' },
-    //     { text: 'News', route: '/news' },
-    //     { text: 'Career', route: '/career' },
-    //     { text: 'Course', route: '/course' },
-    //     { text: 'Package', route: '/package' },
-    //     { text: 'Contact Us', route: '/contact' },
-    //     { text: 'Testimonials', route: '/testimonials' },
-    //     { text: 'Communities', route: '/communities' },
-    //     { text: 'Hackathon', route: '/hack' },
-    //     { text: 'Education', route: '/education' },
-    // ];
-
-    // const FooterItems = [
-    //     { text: 'Social Media', route: '/socialmedia' },
-    //     { text: 'Terms&Conditions', route: '/terms&Conditions' },
-    //     { text: 'Privacy Policy', route: '/privacyPolicy' },
-    // ];
-
-
 
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <Drawer variant="permanent" open={open}>
                 <DrawerHeader>
-                    <div className="flex items-center justify-between w-full px-3">
-                        <MenuIcon onClick={() => setOpen(!open)} className='cursor-pointer ' />
-                        {open ? (
-                           <h6 className='text-xl font-bold'>meta proton</h6>
-                        ) : null}
-                    </div>
-
+                    <MenuIcon onClick={() => setOpen(!open)} />
+                    {open && <h6>meta proton</h6>}
                 </DrawerHeader>
-                <List>
-                    {menuItems.map((item, index) => (
-                        <ListItem key={index} disablePadding sx={{ display: 'block' }} onClick={() => navigate(item.route)}>
-                            <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5 }}>
-                                <ListItemIcon sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center' }}>
-                                  {item.icon}
-                                </ListItemIcon>
-                                <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List>
                 <Divider />
-                {/* <List>
-                    <ListItem disablePadding sx={{ display: 'block' }}>
-                        <ListItemText primary="Footer" className="mx-5 font-bold"
-                            style={{
-                                width: '81px',
-                                height: '16px',
-                                top: '546px',
-                                left: '40px',
-                                opacity: '60%',
-                                fontFamily: 'Nunito Sans',
-                                fontSize: '12px',
-                                lineHeight: '16.37px',
-                                letterSpacing: '0.26px',
-                                color: '#202224'
-                            }} />
-                    </ListItem>
-                    {FooterItems.map((item, index) => (
-                        <ListItem key={index} disablePadding sx={{ display: 'block' }} onClick={() => navigate(item.route)}>
-                            <ListItemButton sx={{ minHeight: 48, justifyContent: open ? 'initial' : 'center', px: 2.5 }}>
-                                <ListItemIcon sx={{ minWidth: 0, mr: open ? 3 : 'auto', justifyContent: 'center' }}>
-                                    <MailIcon />
-                                </ListItemIcon>
-                                <ListItemText primary={item.text} sx={{ opacity: open ? 1 : 0 }} />
-                            </ListItemButton>
-                        </ListItem>
-                    ))}
-                </List> */}
-            </Drawer>
+                <List>
+                    {menuItems.map((item, index) => {
+                        const isSelected = location.pathname === item.route;
 
+                        return (
+                            <ListItem
+                                key={index}
+                                disablePadding
+                                sx={{ display: 'block' }}
+                                onClick={() => navigate(item.route)}
+                                onMouseEnter={() => setIconHovered(index)}
+                                onMouseLeave={() => setIconHovered(null)}
+                            >
+                                <ListItemButton
+                                    sx={{
+                                        minHeight: 34,
+                                        marginX: 1,
+                                        marginY: 1,
+                                        borderRadius: 2,
+                                        justifyContent: open ? 'initial' : 'center',
+                                        backgroundColor: isSelected ? '#FC8503' : 'transparent',
+                                        '&:hover': {
+                                            backgroundColor: '#FC8503',
+                                        },
+                                    }}
+                                >
+                                    <ListItemIcon
+                                        sx={{
+                                            minWidth: open ? 56 : 0,
+                                            justifyContent: 'center',
+                                        }}
+                                    >
+                                        {item.icon}
+                                    </ListItemIcon>
+                                    {open && (
+                                        <ListItemText primary={item.text} />
+                                    )}
+                                </ListItemButton>
+                            </ListItem>
+                        );
+                    })}
+                </List>
+            </Drawer>
         </Box>
     );
 }

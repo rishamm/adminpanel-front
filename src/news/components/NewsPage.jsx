@@ -15,7 +15,7 @@ import Pagination from '@mui/material/Pagination';
 import { useDispatch, useSelector } from 'react-redux';
 import { IoEye } from "react-icons/io5";
 import { useNavigate } from 'react-router-dom';
-import { fetchUserList } from '../../action/userAction'; // Import fetchUserList action
+import { fetchUserList } from '../../action/userAction'; 
 
 const NewsPage = () => {
   const [page, setPage] = useState(1);
@@ -62,7 +62,7 @@ const NewsPage = () => {
                   <TableCell className="text-center">NO</TableCell>
                   <TableCell className="text-left">Username</TableCell>
                   <TableCell className="text-left">Email</TableCell>
-                  <TableCell className="text-left">Phone</TableCell>
+                  <TableCell className="text-left">Level</TableCell>
                   
                   <TableCell className="text-left">Action</TableCell>
                 </TableRow>
